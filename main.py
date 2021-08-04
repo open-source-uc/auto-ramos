@@ -20,7 +20,7 @@ NRC = input('Codigos NRC (Separados por un espacio): ')
 NRC = NRC.split(" ")
 hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
 print('\n')
-print('Toma agendada...')
+print('Toma agendada, recuerda no apagar ni cerrar el programa hasta que ocurra tu toma de ramos y el programa confirme que tomo tus ramos...')
 
 
 def main():
