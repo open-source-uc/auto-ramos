@@ -12,7 +12,7 @@ password = getpass.getpass('Contraseña: ')
 NRC = input('Codigos NRC (Separados por un espacio) (AQUI ES CUANDO APRETAS ENTER CUANDO SEA TU HORA): ')
 NRC = NRC.split(" ")
 
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(executable_path='geckodriver')
 driver.get('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
 # Inicio de sesion
 usuariobox = driver.find_element_by_xpath('//*[@id="UserID"]')
