@@ -6,7 +6,8 @@ from selenium.webdriver.support.select import Select
 
 class AutoRamos:
 
-    # Esta clase de va a encargar de navegar a la pagina web e inscribir los ramos a una cierta hora
+    # Esta clase de va a encargar de navegar a la pagina web e inscribir los ramos
+    # El schedule se debe hacer fuera de la clase llamando el metodo start() a cierta hora
     # Se debe instanciar la clase con los argumentos requeridos y no pedir ningun input dentro de ella
     # Si las credenciales son incorrectas va a saltar una exception que se debe manejar fuera de la clase
 
@@ -16,11 +17,10 @@ class AutoRamos:
             'nt': 'geckodriver.exe',
             'posix': 'geckodriver'}
 
-    def __init__(self, ramos: list, usuario: str, clave: str, hora: str) -> None:
+    def __init__(self, ramos: list, usuario: str, clave: str) -> None:
         self.usuario = usuario
         self.clave = clave
         self.ramos = ramos
-        self.hora = hora
 
         self.os = os.name
         self.driver = None
@@ -29,6 +29,7 @@ class AutoRamos:
 
     def start(self) -> None:
         self.login()
+        self.agregar_ramos()
     
 
     def get_driver(self) -> None:
@@ -70,6 +71,20 @@ class AutoRamos:
             enviarplan = self.driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
             enviarplan.click()
             sleep(1)
+
+
+            # Encuentro todos los bloques de NRC y hago zip para enviar cada uno a su correspondiente bloque
+            nrc_blocks = []
+            nrc_blocks.append(self.driver.find_element_by_xpath('//*[@id="crn_id1"]'))
+            nrc_blocks.append(self.driver.find_element_by_xpath('//*[@id="crn_id2"]'))
+            nrc_blocks.append(self.driver.find_element_by_xpath('//*[@id="crn_id3"]'))
+
+            for nrc, nrc_block in zip(self.ramos, nrc_blocks):
+                nrc_block.send_keys(nrc)
+
+            enviarcambios = self.driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
+            enviarcambios.click()
+            print('¡Ramos tomados!')
             
 
 
