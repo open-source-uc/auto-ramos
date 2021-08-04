@@ -15,13 +15,16 @@ NRC = input('Codigos NRC (Separados por un espacio) (AQUI ES CUANDO APRETAS ENTE
 NRC = NRC.split(" ")
 hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00): ')
 print('\n')
-print('Toma agendada, ')
+print('Toma agendada...')
 
 
 def main():
     driver = webdriver.Firefox(executable_path='geckodriver')
     driver.get('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
     # Inicio de sesion
+    global usuario
+    global password
+    global NRC
     usuariobox = driver.find_element_by_xpath('//*[@id="UserID"]')
     passwordbox = driver.find_element_by_xpath('/html/body/div[3]/form/table/tbody/tr[2]/td[2]/input')
     loginbutton = driver.find_element_by_xpath('/html/body/div[3]/form/p/input')
@@ -30,7 +33,14 @@ def main():
     loginbutton.click()
     time.sleep(1)
     # Ingreso a pagina NRC
-    agregarbutton = driver.find_element_by_xpath('/html/body/div[3]/table[2]/tbody/tr[2]/td[2]/a')
+    try:
+        agregarbutton = driver.find_element_by_xpath('/html/body/div[3]/table[2]/tbody/tr[2]/td[2]/a')
+    except:
+        driver.close()
+        print('Usuario o contraseña incorrecta, favor intentar denuevo')
+        usuario = input('Usuario: ')
+        password = getpass.getpass('Contraseña: ')
+        main()
     agregarbutton.click()
     time.sleep(1)
     enviarbutton = driver.find_element_by_xpath('/html/body/div[3]/form/input')
