@@ -7,7 +7,7 @@ import schedule
 print('¡Bienvenide a auto-ramos UC, el tomador de ramos automatico de la universidad!\n')
 print('FUNCIONAMIENTO:\n')
 print('Primero tendras que ingresar tu usuario y contraseña UC, luego ingresaras tus NRC a tomar y ingresaras a que hora quieres tomar ramos.')
-print('NO CIERRES EL PROGRAMA HASTA TU TOMA DE RAMOS\n')
+print('NO CIERRES EL PROGRAMA HASTA DESPUES DE TU TOMA DE RAMOS\n')
 sistema = input('¿Cual es tu sistema operativo? (windows/linux): ')
 while True:
     if sistema == 'windows' or sistema == 'linux':
