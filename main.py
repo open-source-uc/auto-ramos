@@ -7,7 +7,13 @@ import schedule
 print('¡Bienvenide a auto-ramos UC, el tomador de ramos automatico de la universidad!\n')
 print('FUNCIONAMIENTO:\n')
 print('Primero tendras que ingresar tu usuario y contraseña UC, luego ingresaras tus NRC a tomar y ingresaras a que hora quieres tomar ramos.')
-print('NO CIERRES EL PROGRAMA HASTA TU TOMA DE RAMOS')
+print('NO CIERRES EL PROGRAMA HASTA TU TOMA DE RAMOS\n')
+sistema = input('¿Cual es tu sistema operativo? (windows/linux): ')
+while True:
+    if sistema == 'windows' or sistema == 'linux':
+        break
+    sistema = input('¿Cual es tu sistema operativo? (windows/linux): ')
+print('\n')
 print('Porfavor, ingresa tu usuario UC y contraseña: \n')
 usuario = input('Usuario: ')
 password = getpass.getpass('Contraseña: ')
@@ -19,12 +25,16 @@ print('Toma agendada...')
 
 
 def main():
-    driver = webdriver.Firefox(executable_path='geckodriver')
-    driver.get('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
-    # Inicio de sesion
     global usuario
     global password
     global NRC
+    global sistema
+    if sistema == 'linux':
+        driver = webdriver.Firefox(executable_path='geckodriver')
+    elif sistema == 'windows':
+        driver = webdriver.Firefox(executable_path='geckodriver.exe')
+    driver.get('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
+    # Inicio de sesion
     usuariobox = driver.find_element_by_xpath('//*[@id="UserID"]')
     passwordbox = driver.find_element_by_xpath('/html/body/div[3]/form/table/tbody/tr[2]/td[2]/input')
     loginbutton = driver.find_element_by_xpath('/html/body/div[3]/form/p/input')

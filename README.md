@@ -10,6 +10,7 @@ credenciales UC y los 3 NRC que quiere tomar, automaticamente se logeara y se to
 - Python 3.8
 - Selenium
 - Firefox Webdriver (https://www.selenium.dev/documentation/en/webdriver/driver_requirements/)
+- Schedule
 
 ## ¿Como instalar?
 
