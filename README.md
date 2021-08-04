@@ -1,22 +1,22 @@
 # auto-ramos
-Tomador de ramos automatico. (Por ahora solo funciona en Linux)
+Tomador de ramos automatico para Windows y Linux
 
 ## Funcion
 Este script de Python tiene como principal objetivo hacer que la toma de ramos sea rapida y segura, donde el usuario solo debe ingresar sus
-credenciales UC y los 3 NRC que quiere tomar, automaticamente se logeara y se tomaran los 3 NRC.
+credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se tomaran los NRC a la hora que el usuario fije.
 
-## Modulos/Paquetes requeridos
+## Modulos/Paquetes/Programas requeridos
 
 - Python 3.8
 - Selenium
-- Firefox Webdriver (https://www.selenium.dev/documentation/en/webdriver/driver_requirements/)
+- Firefox Webdriver (https://github.com/mozilla/geckodriver/releases)
 - Schedule
+- Firefox
 
 ## ¿Como instalar?
 
 1. Instalar Selenium: `pip install selenium`
-2. Descargar la version del driver Firefox Webdriver (https://github.com/mozilla/geckodriver/releases)
-3. Colocar 'geckodriver' en el mismo directorio que main.py
+2. Instalar Schedule: `pip install schedule`
 
 ## ¿Como ejecutar?
 
