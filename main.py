@@ -20,6 +20,11 @@ password = input('Contraseña: ')
 NRC = input('Codigos NRC (Separados por un espacio): ')
 NRC = NRC.split(" ")
 hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
+while True:
+    if len(hora) == 5:
+        break
+    print('Formato de hora incorrecto, recuerda agregar un 0 en caso de que sea en la mañana, ejemplo 08:00 en vez de 8:00')
+    hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
 print('\n')
 print('Toma agendada, recuerda no apagar ni cerrar el programa hasta que ocurra tu toma de ramos y el programa confirme que tomo tus ramos...')
 
