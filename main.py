@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
 import time
-import getpass
 import schedule
 
 print('¡Bienvenide a auto-ramos UC, el tomador de ramos automatico de la universidad!\n')
@@ -19,7 +18,7 @@ usuario = input('Usuario: ')
 password = input('Contraseña: ')
 NRC = input('Codigos NRC (Separados por un espacio): ')
 NRC = NRC.split(" ")
-hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00): ')
+hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
 print('\n')
 print('Toma agendada...')
 
@@ -49,7 +48,7 @@ def main():
         driver.close()
         print('Usuario o contraseña incorrecta, favor intentar denuevo')
         usuario = input('Usuario: ')
-        password = getpass.getpass('Contraseña: ')
+        password = input('Contraseña: ')
         main()
     agregarbutton.click()
     time.sleep(1)
@@ -77,6 +76,7 @@ def main():
         i += 1
     enviarcambios = driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
     enviarcambios.click()
+    print('¡Ramos tomados! Ya es seguro cerrar la aplicacion...')
 
 
 schedule.every().day.at(hora).do(main)

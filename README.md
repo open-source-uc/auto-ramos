@@ -17,6 +17,7 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 
 1. Instalar Selenium: `pip install selenium`
 2. Instalar Schedule: `pip install schedule`
+3. Clonar el repositorio `git clone https://github.com/open-source-uc/auto-ramos`
 
 ## ¿Como ejecutar?
 
