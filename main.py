@@ -75,7 +75,23 @@ def main():
     time.sleep(1)
     seleccionarlist = driver.find_element_by_xpath('//*[@id="st_path_id"]')
     seleccionarlist = Select(seleccionarlist)
-    seleccionarlist.select_by_index(1)
+    # No lo puedo testear pero por Dieguito Maradona que funcione BEGIN
+    planes = seleccionarlist.options
+    planes = planes[1:]
+    print('Se encontraron los siguientes planes de estudios:')
+    for i in range(len(planes)):
+        print(str(i) + ": " + planes[i])
+    try:
+        planseleccionado = int(input('Ingresa el numero del plan de estudios para el que quieres tomar ramos: '))
+        assert isinstance(planseleccionado, int)
+        assert planseleccionado <= len(planes)
+        seleccionarlist.select_by_index(planseleccionado)
+    except:
+        print('Error: Plan de estudios no válido, recuerda ingresar el numero del plan de estudios para el que quieres tomar ramos')
+        nuevoplanseleccionado = int(input('Ingresa el numero del plan de estudios para el que quieres tomar ramos: '))
+        assert nuevoplanseleccionado <= len(planes)
+        seleccionarlist.select_by_index(nuevoplanseleccionado)
+    # No lo puedo testear pero por Dieguito Maradona que funcione END
     enviarplan = driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
     enviarplan.click()
     time.sleep(1)
