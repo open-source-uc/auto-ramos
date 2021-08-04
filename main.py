@@ -35,6 +35,7 @@ seleccionarlist.select_by_index(1)
 enviarplan = driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
 enviarplan.click()
 time.sleep(1)
+# Ingreso a plataforma de ramos
 i = 1
 while i <= 3:
     if i == 1:
