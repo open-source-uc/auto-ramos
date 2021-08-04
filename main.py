@@ -3,6 +3,7 @@ from selenium.webdriver.support.select import Select
 import time
 import schedule
 
+
 print('¡Bienvenide a auto-ramos UC, el tomador de ramos automatico de la universidad!')
 print('Creado con <3 por Dyotson (Max Militzer)\n')
 print('FUNCIONAMIENTO:\n')
@@ -13,6 +14,17 @@ while True:
     if sistema == 'windows' or sistema == 'linux':
         break
     sistema = input('¿Cual es tu sistema operativo? (windows/linux): ')
+print('Testeando selenium driver, esto no tomara más de unos segundos...\n')
+try:
+    if sistema == 'linux':
+        driver = webdriver.Firefox(executable_path='geckodriver')
+    elif sistema == 'windows':
+        driver = webdriver.Firefox(executable_path='geckodriver.exe')
+    driver.get('https://www.google.com')
+    driver.close()
+except:
+    print('Webdriver no se pudo ejecutar, porfavor revisa que tengas todos los componentes instalados.')
+    exit()
 print('\n')
 print('Porfavor, ingresa tu usuario UC y contraseña: \n')
 usuario = input('Usuario: ')
