@@ -5,6 +5,9 @@ Tomador de ramos automatico para Windows y Linux
 Este script de Python tiene como principal objetivo hacer que la toma de ramos sea rapida y segura, donde el usuario solo debe ingresar sus
 credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se tomaran los NRC a la hora que el usuario fije.
 
+## IMPORTANTE
+- Intentar no usar el computador a la hora de tomar ramos
+
 ## Modulos/Paquetes/Programas requeridos
 
 - Python 3.8
@@ -18,7 +21,8 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 1. Instalar Selenium: `pip install selenium`
 2. Instalar Schedule: `pip install schedule`
 3. Instalar Firefox: https://www.mozilla.org/es-CL/firefox/new/
-4. Clonar el repositorio `git clone https://github.com/open-source-uc/auto-ramos`
+4. <b>SOLO PARA LINUX</b>: Para linux, deben instalar geckodriver en PATH, usando `apt install firefox-geckodriver`
+5. Clonar este repositorio: `git clone https://github.com/open-source-uc/auto-ramos`
 
 ## ¿Como ejecutar?
 
