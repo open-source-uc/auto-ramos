@@ -21,7 +21,8 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 1. Instalar Selenium: `pip install selenium`
 2. Instalar Schedule: `pip install schedule`
 3. Instalar Firefox: https://www.mozilla.org/es-CL/firefox/new/
-4. Clonar el repositorio `git clone https://github.com/open-source-uc/auto-ramos`
+4. SOLO PARA LINUX: Para linux, deben instalar geckodriver en PATH, usando `apt install firefox-geckodriver`
+5. Clonar el repositorio `git clone https://github.com/open-source-uc/auto-ramos`
 
 ## ¿Como ejecutar?
 
