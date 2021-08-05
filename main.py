@@ -92,9 +92,9 @@ def main():
     planes = seleccionarlist.options
     planes = planes[1:] # Planes de estudios
     for i in range(len(planes)):
-        if normalize(planseleccionado.lower()) in normalize(planes[i].lower()) # Quita tildes y pone ambos strings en minúsculas para que sea la búsqueda sea insensible a variaciones
-        seleccionarlist.select_by_index(i+1)
-        break
+        if normalize(planseleccionado.lower()) in normalize(planes[i].lower()): # Quita tildes y pone ambos strings en minúsculas para que sea la búsqueda sea insensible a variaciones
+            seleccionarlist.select_by_index(i+1)
+            break
     # No lo puedo testear pero por Dieguito Maradona que funcione END
     enviarplan = driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
     enviarplan.click()
