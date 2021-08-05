@@ -29,6 +29,8 @@ print('\n')
 print('Porfavor, ingresa tu usuario UC y contraseña: \n')
 usuario = input('Usuario: ')
 password = input('Contraseña: ')
+planseleccionado = input('Ingresa el plan de estudios para el que quieres tomar ramos (Ej: Ingeniería o Medicina): ')
+assert isinstance(planseleccionado, str)
 NRC = input('Codigos NRC (Separados por un espacio): ')
 NRC = NRC.split(" ")
 hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
@@ -40,6 +42,17 @@ while True:
 print('\n')
 print('Toma agendada, recuerda no apagar ni cerrar el programa hasta que ocurra tu toma de ramos y el programa confirme que tomo tus ramos...')
 
+def normalize(s): # Función de https://micro.recursospython.com/recursos/como-quitar-tildes-de-una-cadena.html
+    replacements = (
+        ("á", "a"),
+        ("é", "e"),
+        ("í", "i"),
+        ("ó", "o"),
+        ("ú", "u"),
+    )
+    for a, b in replacements:
+        s = s.replace(a, b).replace(a.upper(), b.upper())
+    return s
 
 def main():
     global usuario
@@ -77,20 +90,11 @@ def main():
     seleccionarlist = Select(seleccionarlist)
     # No lo puedo testear pero por Dieguito Maradona que funcione BEGIN
     planes = seleccionarlist.options
-    planes = planes[1:]
-    print('Se encontraron los siguientes planes de estudios:')
+    planes = planes[1:] # Planes de estudios
     for i in range(len(planes)):
-        print(str(i) + ": " + planes[i])
-    try:
-        planseleccionado = int(input('Ingresa el numero del plan de estudios para el que quieres tomar ramos: '))
-        assert isinstance(planseleccionado, int)
-        assert planseleccionado <= len(planes)
-        seleccionarlist.select_by_index(planseleccionado)
-    except:
-        print('Error: Plan de estudios no válido, recuerda ingresar el numero del plan de estudios para el que quieres tomar ramos')
-        nuevoplanseleccionado = int(input('Ingresa el numero del plan de estudios para el que quieres tomar ramos: '))
-        assert nuevoplanseleccionado <= len(planes)
-        seleccionarlist.select_by_index(nuevoplanseleccionado)
+        if normalize(planseleccionado.lower()) in normalize(planes[i].lower()) # Quita tildes y pone ambos strings en minúsculas para que sea la búsqueda sea insensible a variaciones
+        seleccionarlist.select_by_index(i)
+        break
     # No lo puedo testear pero por Dieguito Maradona que funcione END
     enviarplan = driver.find_element_by_xpath('/html/body/div[3]/form/input[19]')
     enviarplan.click()
