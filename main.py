@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.select import Select
 import time
 import schedule
+import getpass
 
 
 print('¡Bienvenide a auto-ramos UC, el tomador de ramos automatico de la universidad!')
@@ -28,7 +29,7 @@ except:
 print('\n')
 print('Porfavor, ingresa tu usuario UC y contraseña: \n')
 usuario = input('Usuario: ')
-password = input('Contraseña: ')
+password = getpass.getpass('Contraseña: ')
 NRC = input('Codigos NRC (Separados por un espacio): ')
 NRC = NRC.split(" ")
 hora = input('Ingresa la hora a la que tomaras ramos en formato 24hrs (Ej: 17:00 o 08:00): ')
