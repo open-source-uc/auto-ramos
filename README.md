@@ -5,6 +5,8 @@ Tomador de ramos automatico para Windows y Linux
 Este script de Python tiene como principal objetivo hacer que la toma de ramos sea rapida y segura, donde el usuario solo debe ingresar sus
 credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se tomaran los NRC a la hora que el usuario fije.
 
+Ejemplo de funcionamiento: https://youtu.be/hzlaWk36eW0
+
 ## IMPORTANTE
 - Intentar no usar el computador a la hora de tomar ramos
 
