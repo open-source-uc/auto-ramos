@@ -5,8 +5,8 @@ import urllib3
 POST_URL = "http://ssb.uc.cl/ERPUC/twbkwbis.P_ValLogin"
 GET_URL = "http://ssb.uc.cl/ERPUC/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu"
 
-usuario = "fdsmith"
-password = "!Password1!"
+usuario = "username"
+password = "pwd"
 
 
 def save_response(respuesta):
@@ -28,6 +28,7 @@ payload = {
 data = "sid=" + usuario + "&PIN=" + password
 
 
+# https://urllib3.readthedocs.io/en/stable/user-guide.html#request-data
 http = urllib3.PoolManager()
 r = http.request(
     'POST',
@@ -37,8 +38,4 @@ r = http.request(
 )
 sessid = extraer_sessid(r.getheaders()["Set-Cookie"])
 print(sessid)
-
-
-
-
 
