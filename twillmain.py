@@ -6,7 +6,7 @@ import time
 # TODO: Agregar Schedule y ver como seleccionar plan de estudios
 # Ingresar usuario y contraseña
 usuario = input("Usuario: ")
-password = input("Contraseña: ")
+password = getpass.getpass("Contraseña: ")
 NRC = input("NRC (Separados por un espacio): ")
 inicio = time.time()
 
@@ -22,7 +22,13 @@ go("http://ssb.uc.cl/ERPUC/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu")
 
 # Ingresar a seleccionar periodo
 go("http://ssb.uc.cl/ERPUC/bwskfreg.P_AltPin")
-fv('2', 'term_in', '202122')
+a = showforms()
+# print("*")
+# print(a[1].fields.keys())
+semestre = a[1].fields['term_in']
+# print("*")
+
+fv('2', 'term_in', semestre)
 submit('0')
 
 save_html(filename="respuesta2.html")
