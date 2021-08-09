@@ -3,16 +3,10 @@ import getpass
 import time
 
 
-def save_response(respuesta):
-    html = respuesta
-    with open("respuesta2.html", "w") as archivo_respuesta:
-        archivo_respuesta.write(html)
-    print("Se ha guardado respuesta2.html correctamente")
-
-
+# TODO: Agregar Schedule y ver como seleccionar plan de estudios
 # Ingresar usuario y contraseña
 usuario = input("Usuario: ")
-password = getpass.getpass("Contraseña: ")
+password = input("Contraseña: ")
 NRC = input("NRC (Separados por un espacio): ")
 inicio = time.time()
 
@@ -31,5 +25,5 @@ go("http://ssb.uc.cl/ERPUC/bwskfreg.P_AltPin")
 fv('2', 'term_in', '202122')
 submit('0')
 
-save_response(show())
+save_html(filename="respuesta2.html")
 print(time.time() - inicio)
