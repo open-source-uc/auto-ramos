@@ -8,14 +8,16 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 ## IMPORTANTE
 - Intentar no usar el computador a la hora de tomar ramos
 
-## Modulos/Paquetes/Programas requeridos
+## Librerias/Paquetes/Programas requeridos
 
-- twill
 - Python 3.8
+- twill
+- schedule
 
 ## ¿Como instalar?
 
 1. Instalar twill: `pip install twill`
+2. Instalar schedule: `pip install schedule`
 
 ## ¿Como ejecutar?
 
