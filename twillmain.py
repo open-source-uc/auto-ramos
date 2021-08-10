@@ -1,20 +1,20 @@
 from twill.commands import *
 import schedule
 
-# Ingresar usuario y contraseña
-print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
-usuario = input("Usuario UC: ")
-password = input("Contraseña UC: ")
-NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
-NRC = NRC.split()
-hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
-print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
-
 
 def main():
-    global usuario
-    global password
-    global NRC
+    # Ingresar usuario y contraseña
+    print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
+    usuario = input("Usuario UC: ")
+    password = input("Contraseña UC: ")
+    NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
+    NRC = NRC.split()
+    hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
+    print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
+    reservar(usuario, password, NRC, hora)
+
+
+def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que usa Sessions
     # Logearse
     print('\nTomando ramos...')
     redirect_output('output.log')
@@ -30,10 +30,7 @@ def main():
     # Ingresar a seleccionar periodo
     go("http://ssb.uc.cl/ERPUC/bwskfreg.P_AltPin")
     a = showforms()
-    # print("*")
-    # print(a[1].fields.keys())
     semestre = a[1].fields['term_in']
-    # print("*")
 
     # Seleccionar ultimo semestre
     fv('2', 'term_in', semestre)
@@ -61,6 +58,11 @@ def main():
     save_html('pruebadetoma.html')
 
 
-schedule.every().day.at(hora).do(main)
-while True:
-    schedule.run_pending()
+def reservar(usuario, password, NRC, hora):
+    schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
+    while True:
+        schedule.run_pending()
+
+
+if __name__ == '__main__':
+    main()
