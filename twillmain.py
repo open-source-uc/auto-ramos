@@ -9,6 +9,7 @@ password = input("Contraseña UC: ")
 NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
 NRC = NRC.split()
 hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
+print('\n¡Toma agendada! ¡No cierres el programa!')
 
 
 def main():
