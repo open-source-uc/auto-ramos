@@ -1,7 +1,6 @@
 from twill.commands import *
 import schedule
 
-
 # Ingresar usuario y contraseña
 print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
 usuario = input("Usuario UC: ")
@@ -9,6 +8,7 @@ password = input("Contraseña UC: ")
 NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
 NRC = NRC.split()
 hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
+print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
 
 
 def main():
@@ -16,6 +16,8 @@ def main():
     global password
     global NRC
     # Logearse
+    print('\nTomando ramos...')
+    redirect_output('output.log')
     go('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
     formclear('1')
     fv('1', 'sid', usuario)
@@ -54,6 +56,7 @@ def main():
         fv('2', 100, NRC[1])
         fv('2', 105, NRC[2])
     submit(submit_button=112)
+    reset_output()
     print('\n¡Ramos tomados! Ya puedes cerrar el programa...')
     save_html('pruebadetoma.html')
 
