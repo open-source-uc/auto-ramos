@@ -1,11 +1,11 @@
 from twill.commands import *
 import schedule
-
+import getpass
 
 # Ingresar usuario y contraseña
 print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
 usuario = input("Usuario UC: ")
-password = input("Contraseña UC: ")
+password = getpass.getpass("Contraseña UC: ")
 NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
 NRC = NRC.split()
 hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
