@@ -19,6 +19,7 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 
 1. Instalar twill: `pip install twill`
 2. Instalar schedule: `pip install schedule`
+3. Clonar la libreria `github clone https://github.com/open-source-uc/auto-ramos.git`
 
 ## ¿Como ejecutar?
 
