@@ -69,7 +69,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="confirmar_button_1">
+          <widget class="QPushButton" name="add_button_1">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
@@ -124,7 +124,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="confirmar_button_2">
+          <widget class="QPushButton" name="add_button_2">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
@@ -179,7 +179,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="confirmar_button_3">
+          <widget class="QPushButton" name="add_button_3">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
@@ -673,7 +673,7 @@ QPushButton::pressed{
      <string>Confirmar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="confirmar_button_4">
+   <widget class="QPushButton" name="cancelar_button">
     <property name="geometry">
      <rect>
       <x>890</x>
