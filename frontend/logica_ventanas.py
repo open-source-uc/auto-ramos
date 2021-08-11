@@ -8,6 +8,7 @@ class Usuario:
     def __init__(self) -> None:
         self.username = ""
         self.password = ""
+        self.nrcs_list = []
 
 
 class Logica(QObject):
@@ -19,7 +20,6 @@ class Logica(QObject):
         self.usuario = Usuario()
         self.main_window = main_window
         self.login_window = login_window
-        self.nrcs_list = []
         self.login_signal.connect(self.verify_login)
 
     def verify_login(self, credenciales):

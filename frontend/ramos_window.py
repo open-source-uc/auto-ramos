@@ -47,11 +47,20 @@ class RamosWindow(window_name, base_class):
             label.hide()
             eliminar_button.hide()
 
-        self.confirmar_button_1.clicked.connect(lambda:
-                                                self.show_nrc_layout("2"))
-        self.confirmar_button_2.clicked.connect(lambda:
-                                                self.show_nrc_layout("3"))
-        self.confirmar_button.clicked.connect(lambda: print("Holi"))
+        self.add_button_1.clicked.connect(lambda:
+                                          self.show_nrc_layout("2"))
+        self.add_button_2.clicked.connect(lambda:
+                                          self.show_nrc_layout("3"))
+        self.add_button_1.clicked.connect(lambda: self.add_nrc(1))
+        self.add_button_2.clicked.connect(lambda: self.add_nrc(2))
+        self.add_button_3.clicked.connect(lambda: self.add_nrc(3))
+        self.confirmar_button.clicked.connect(self.DEBUG)
+
+    def DEBUG(self):
+        print(self.timeEdit.time().toString()[:-3])
+
+    def add_nrc(self, id_):
+        pass
 
     def show_nrc_layout(self, id_):
         self.nrc_frames[id_].show()
