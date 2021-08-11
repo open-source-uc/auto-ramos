@@ -1,5 +1,6 @@
 from frontend.login_window import LoginWindow
 from frontend.ramos_window import RamosWindow
+from frontend.logica_ventanas import Logica
 from PyQt5.QtWidgets import QStackedWidget
 from PyQt5.QtWidgets import QApplication
 import params
@@ -11,6 +12,9 @@ class MainWidget(QStackedWidget):
         super().__init__()
         self.login_window = LoginWindow()
         self.main_window = RamosWindow()
+        self.logica = Logica(self.login_window, self.main_window)
+
+        self.login_window.login_request_signal.connect(self.logica.verify_login)
 
         self.addWidget(self.login_window)
         self.addWidget(self.main_window)

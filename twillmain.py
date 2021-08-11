@@ -60,7 +60,8 @@ def reservar(usuario, password, NRC, hora):
         schedule.run_pending()
 
 
-def verificar_sesion(usuario, password):
+def verificar_sesion(usuario, password) -> tuple:
+    # (True/False, Razón)
     print('\nChequeando credenciales...')
     redirect_output('output.log')
     go('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
@@ -73,9 +74,8 @@ def verificar_sesion(usuario, password):
     try:
         find('Agregar o Eliminar Clases')
     except:
-        print('\nCredenciales invalidas, porfavor intentar denuevo')
-        exit()
-    print('¡Credenciales aceptadas!')
+        return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
+    return(True, '¡Credenciales aceptadas')
 
 
 if __name__ == '__main__':

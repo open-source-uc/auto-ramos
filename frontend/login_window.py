@@ -9,6 +9,8 @@ window_name, base_class = uic.loadUiType(params.PATH_LOGIN_WINDOW)
 class LoginWindow(window_name, base_class):
 
     switch_window_signal = pyqtSignal()
+    login_request_signal = pyqtSignal(list)
+    failed_login_signal = pyqtSignal(str)
 
     def __init__(self) -> None:
         super().__init__()
@@ -22,7 +24,8 @@ class LoginWindow(window_name, base_class):
             "USUARIO O CONTRASEÑA INCORRECTAS")
         self.invalid_session_popup.setIcon(QMessageBox.Critical)
 
-        self.login_button.clicked.connect(self.switch_window)
+        self.failed_login_signal.connect(self.raise_popup)
+        self.login_button.clicked.connect(self.login)
         self.mostrar_clave_checkbox.stateChanged.connect(self.show_password)
 
     def show_password(self):
@@ -31,8 +34,10 @@ class LoginWindow(window_name, base_class):
         else:
             self.password_box.setEchoMode(QLineEdit.Password)
 
-    def raise_popup(self):
+    def raise_popup(self, reason):
         self.invalid_session_popup.exec_()
 
-    def switch_window(self):
-        self.switch_window_signal.emit()
+    def login(self):
+        credenciales = [self.username_lineedit.text(),
+                        self.password_box.text()]
+        self.login_request_signal.emit(credenciales)
