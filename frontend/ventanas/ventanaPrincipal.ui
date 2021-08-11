@@ -41,7 +41,7 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -96,7 +96,7 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -151,7 +151,7 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -666,7 +666,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
 }
 
 QPushButton::pressed{
-    background-color : rgb(0, 22, 0);
+    background-color : rgb(0, 40, 0);
 }</string>
     </property>
     <property name="text">
@@ -690,7 +690,7 @@ background-color:  rgb(176, 176, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;
 }
 QPushButton::pressed{
-    background-color : rgb(0, 22, 0);
+    background-color : rgb(80, 80, 0);
 }</string>
     </property>
     <property name="text">
