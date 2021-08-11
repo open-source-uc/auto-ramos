@@ -62,7 +62,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="nrc_lineedit_1">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
@@ -117,7 +117,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3">
+          <widget class="QLineEdit" name="nrc_lineedit_2">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
@@ -172,7 +172,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2">
+          <widget class="QLineEdit" name="nrc_lineedit_3">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
            </property>
