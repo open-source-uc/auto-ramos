@@ -8,6 +8,7 @@ credenciales UC y los NRC que quiere tomar, automaticamente se logeara y se toma
 ## IMPORTANTE
 
 - Intentar no usar el computador a la hora de tomar ramos
+- Este programa toma solo el primer plan de estudios de la persona, osea, no utilizar si tienes más de un plan de estudios
 
 ## Librerias/Paquetes/Programas requeridos
 
