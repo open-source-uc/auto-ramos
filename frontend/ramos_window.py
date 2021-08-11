@@ -51,6 +51,7 @@ class RamosWindow(window_name, base_class):
                                                 self.show_nrc_layout("2"))
         self.confirmar_button_2.clicked.connect(lambda:
                                                 self.show_nrc_layout("3"))
+        self.confirmar_button.clicked.connect(lambda: print("Holi"))
 
     def show_nrc_layout(self, id_):
         self.nrc_frames[id_].show()
