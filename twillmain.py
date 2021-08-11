@@ -53,6 +53,7 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... (Recuerda revisar el archivo \'pruebadetoma.html\' para verificar errores')
     save_html('pruebadetoma.html')
 
+
 def reservar(usuario, password, NRC, hora):
     schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
     while True:
