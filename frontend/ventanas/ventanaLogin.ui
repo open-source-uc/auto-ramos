@@ -41,7 +41,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="username_lineedit">
          <property name="minimumSize">
           <size>
            <width>131</width>
