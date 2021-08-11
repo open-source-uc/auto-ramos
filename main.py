@@ -14,7 +14,15 @@ class MainWidget(QStackedWidget):
         self.main_window = RamosWindow()
         self.logica = Logica(self.login_window, self.main_window)
 
-        self.login_window.login_request_signal.connect(self.logica.verify_login)
+        self.login_window.login_request_signal.connect(
+            self.logica.verify_login
+        )
+        self.main_window.add_nrc_signal.connect(self.logica.add_nrc)
+        self.logica.show_nrc_signal.connect(
+            self.main_window.show_confirmed_nrc
+        )
+        self.main_window.del_nrc_signal.connect(self.logica.del_nrc)
+        self.main_window.reservar_signal.connect(self.logica.request_time)
 
         self.addWidget(self.login_window)
         self.addWidget(self.main_window)

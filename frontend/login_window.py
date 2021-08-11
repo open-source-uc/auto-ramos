@@ -1,5 +1,8 @@
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QWidget, QLineEdit, QMessageBox
+from PyQt5.QtWidgets import (
+    QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QWidget, QLineEdit,
+    QMessageBox
+)
 import params
 from PyQt5 import uic
 

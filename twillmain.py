@@ -1,6 +1,8 @@
 from twill.commands import *
 import schedule
 
+avance = 0
+
 
 def main():
     # Ingresar usuario y contraseña
@@ -17,26 +19,32 @@ def main():
 
 def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que usa Sessions
     # Ya logeado, printea que va a tomar ramos y redirige el output
+    global avance
+    avance = 16
     print('\nTomando ramos...')
     redirect_output('output.log')
 
     # Ingresar a Menu Principal
     go("http://ssb.uc.cl/ERPUC/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu")
+    avance = 32
 
     # Ingresar a seleccionar periodo
     go("http://ssb.uc.cl/ERPUC/bwskfreg.P_AltPin")
     a = showforms()
     semestre = a[1].fields['term_in']
+    avance = 48
 
     # Seleccionar ultimo semestre
     fv('2', 'term_in', semestre)
     submit('0')
+    avance = 64
 
     # Seleccionar primer plan de estudio
     b = showforms()
     plan = b[1].get_element_by_id('st_path_id').value_options
     fv('2', 'st_path', plan[1])
     submit('0')
+    avance = 80
 
     # Aplicar NRC
     if len(NRC) == 1:
@@ -50,8 +58,10 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
         fv('2', 105, NRC[2])
     submit(submit_button=112)
     reset_output()
+    avance = 100
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... (Recuerda revisar el archivo \'pruebadetoma.html\' para verificar errores')
     save_html('pruebadetoma.html')
+    return
 
 
 def reservar(usuario, password, NRC, hora):

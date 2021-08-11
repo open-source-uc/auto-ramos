@@ -14,9 +14,12 @@ class Usuario:
 class Logica(QObject):
 
     login_signal = pyqtSignal(list)
+    show_nrc_signal = pyqtSignal(str)
+    # color: rgb(0, 85, 0); --> El color verde bueno =)
 
     def __init__(self, login_window, main_window):
         super().__init__()
+        self.time = '00:00'
         self.usuario = Usuario()
         self.main_window = main_window
         self.login_window = login_window
@@ -32,7 +35,27 @@ class Logica(QObject):
             self.login_window.failed_login_signal.emit(respuesta[1])
 
     def add_nrc(self, nrc):
-        self.nrcs_list.append(str(nrc))
+        '''
+        Revisar:
+        - Que NRCs no se repitan
+        - Que sean numericos y válidos
+        '''
+        self.usuario.nrcs_list.append(str(nrc))
+        print(f"Backend DEBUG: Se ha añadido el nrc {nrc} de pana!")
+        print(self.usuario.nrcs_list)
+        self.show_nrc_signal.emit(nrc)
 
     def del_nrc(self, nrc):
-        self.nrcs_list.remove(str(nrc))
+        self.usuario.nrcs_list.remove(str(nrc))
+        print(f"Backend DEBUG: Se ha ELIMINADO el nrc {nrc} de pana!")
+        print(self.usuario.nrcs_list)
+
+    def request_time(self, time):
+        self.time = time
+        self.reservar()
+
+    def reservar(self):
+        twillmain.reservar(
+            self.usuario.username, self.usuario.password,
+            self.usuario.nrcs_list, self.time
+        )
