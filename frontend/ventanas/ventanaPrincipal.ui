@@ -247,7 +247,7 @@ color: rgb(0, 0, 0);</string>
         <item>
          <widget class="QLabel" name="label_ramo_tit_1">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -258,7 +258,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
         <item>
          <widget class="QLabel" name="label_ramo_1">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -296,7 +296,7 @@ background-color: rgb(136, 0, 0);</string>
         <item>
          <widget class="QLabel" name="label_ramo_tit_2">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -307,7 +307,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
         <item>
          <widget class="QLabel" name="label_ramo_2">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -345,7 +345,7 @@ background-color: rgb(136, 0, 0);</string>
         <item>
          <widget class="QLabel" name="label_ramo_tit_3">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -356,7 +356,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
         <item>
          <widget class="QLabel" name="label_ramo_3">
           <property name="styleSheet">
-           <string notr="true">color: rgb(0, 85, 0);
+           <string notr="true">color: rgb(0, 0, 0);
 font: 9pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="text">
@@ -699,6 +699,63 @@ todo</string>
     </property>
     <property name="autoRepeat">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="tiempo_progressbar">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>70</y>
+      <width>211</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1000000</width>
+      <height>1000000</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: red;
+color: (0, 0, 0);
+border-style: outset;
+border-width: 2px;
+border-color: #74c8ff;
+border-radius: 7px;
+text-align: center; }
+QProgressBar::chunk {
+background-color: rgb(85, 255, 0);</string>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+    <property name="textVisible">
+     <bool>true</bool>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
