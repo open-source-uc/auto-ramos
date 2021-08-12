@@ -129,4 +129,7 @@ dmypy.json
 .pyre/
 geckodriver.log
 
-pruebadetoma.html
+# HTML
+*.html
+
+.vscode
