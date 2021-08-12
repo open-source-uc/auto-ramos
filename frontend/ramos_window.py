@@ -16,7 +16,6 @@ window_name, base_class = uic.loadUiType(params.PATH_RAMOS_WINDOW)
 class ThreadReserva(Thread):
 
     def __init__(self, reservar_signal, *args, **kwargs):
-        # Podemos usar *args y **kwargs para pasar argumentos a Thread
         super().__init__(*args, **kwargs)
         self.reservar_signal = reservar_signal
         self.tiempo = "00:00"
