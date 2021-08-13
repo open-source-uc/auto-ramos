@@ -94,7 +94,6 @@ def verificar_sesion(usuario, password) -> tuple:
     except:
         print('Credenciales rechazadas, porfavor intenta nuevamente')
         return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
-    
 
 
 if __name__ == '__main__':
