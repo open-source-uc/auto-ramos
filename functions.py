@@ -36,4 +36,4 @@ def obtener_errores_de(ruta):
     return None       
 
 if __name__ == '__main__':
-    print(obtener_errores_de('pruebadetoma1.html'))
+    print(obtener_errores_de('pruebadetoma.html'))
