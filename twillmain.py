@@ -1,12 +1,9 @@
 from twill.commands import *
 import schedule
-<<<<<<< HEAD
 from functions import obtener_errores_de
-=======
 
 avance = 0
 
->>>>>>> bbaeecb8b6c4022ef9f70a1eb4ab00719d3cd552
 
 def main():
     # Ingresar usuario y contraseña
