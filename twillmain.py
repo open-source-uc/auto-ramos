@@ -4,7 +4,6 @@ from functions import obtener_errores_de
 
 avance = 0
 
-
 def main():
     # Ingresar usuario y contraseña
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
@@ -14,6 +13,8 @@ def main():
     NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
     NRC = NRC.split()
     hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
+    if hora == 'debug':
+        tomar_ramos(usuario, password, NRC)
     print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
     reservar(usuario, password, NRC, hora)
 
@@ -73,6 +74,7 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     save_html('pruebadetoma.html')
     print(obtener_errores_de('pruebadetoma.html'))
     return
+    exit()
 
 
 def reservar(usuario, password, NRC, hora):
