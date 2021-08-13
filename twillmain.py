@@ -4,7 +4,6 @@ from functions import obtener_errores_de
 
 avance = 0
 
-
 def main():
     # Ingresar usuario y contraseña
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
