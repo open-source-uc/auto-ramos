@@ -10,10 +10,14 @@ def main():
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
     usuario = input("Usuario UC: ")
     password = input("Contraseña UC: ")
-    verificar_sesion(usuario, password)
+    chequeo = verificar_sesion(usuario, password)
+    if chequeo[0] is False:
+        exit()
     NRC = input("NRC (Separados por un espacio, Ej: 1234 1234 1234): ")
     NRC = NRC.split()
     hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
+    if hora == 'debug':
+        tomar_ramos(usuario, password, NRC)
     print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
     reservar(usuario, password, NRC, hora)
 
@@ -72,13 +76,16 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... (Recuerda revisar el archivo \'pruebadetoma.html\' para verificar errores')
     save_html('pruebadetoma.html')
     print(obtener_errores_de('pruebadetoma.html'))
-    return
+    exit()
 
 
 def reservar(usuario, password, NRC, hora):
-    schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
-    while True:
-        schedule.run_pending()
+    try:
+        schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
+        while True:
+            schedule.run_pending()
+    except:
+        print('Formato de hora invalido, recuerda ingresarlo en 24hrs')
 
 
 def verificar_sesion(usuario, password) -> tuple:
@@ -94,9 +101,11 @@ def verificar_sesion(usuario, password) -> tuple:
     reset_output()
     try:
         find('Agregar o Eliminar Clases')
+        print('¡Credenciales aceptadas!')
+        return(True, '¡Credenciales aceptadas!')
     except:
+        print('Credenciales rechazadas, porfavor intenta nuevamente')
         return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
-    return(True, '¡Credenciales aceptadas')
 
 
 if __name__ == '__main__':
