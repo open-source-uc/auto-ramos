@@ -1,5 +1,5 @@
 def extraer(s):
-    return s[s.find('>') + 1 : s.find('</')]
+    return s[s[:len(s)-2].rfind('>') + 1 : s.find('</TD')].strip()
 
 def hay_errores(info):
     inicio = 0
@@ -36,4 +36,4 @@ def obtener_errores_de(ruta):
     return None       
 
 if __name__ == '__main__':
-    print(obtener_errores_de('pruebadetoma.html'))
+    print(obtener_errores_de('pruebadetoma1.html'))
