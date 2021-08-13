@@ -1,6 +1,6 @@
 from twill.commands import *
 import schedule
-
+from functions import obtener_errores_de
 
 def main():
     # Ingresar usuario y contraseña
@@ -42,13 +42,6 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     fv('2', 'st_path', plan[1])
     submit('0')
 
-    c = showforms()
-    # Borrar NRC
-    NRC = c[1].fields['CRN_IN']
-    print(NRC)
-    retiro = c[1].get_element_by_id('action_id1').value_options
-    fv('2', 'RSTS_IN', retiro[1])
-
     # Aplicar NRC
     if len(NRC) == 1:
         fv('2', 95, NRC[0])
@@ -63,7 +56,7 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     reset_output()
     print('\n¡Ramos tomados! Ya puedes cerrar el programa...')
     save_html('pruebadetoma.html')
-
+    print(obtener_errores_de('pruebadetoma.html'))
 
 def reservar(usuario, password, NRC, hora):
     schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
