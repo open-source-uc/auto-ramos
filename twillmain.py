@@ -46,13 +46,6 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     submit('0')
     avance = 80
 
-    c = showforms()
-    # Borrar NRC
-    NRC = c[1].fields['CRN_IN']
-    print(NRC)
-    retiro = c[1].get_element_by_id('action_id1').value_options
-    fv('2', 'RSTS_IN', retiro[1])
-
     # Aplicar NRC
     if len(NRC) == 1:
         fv('2', 95, NRC[0])
