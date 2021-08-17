@@ -13,15 +13,15 @@ import os
 window_name, base_class = uic.loadUiType(params.PATH_RAMOS_WINDOW)
 
 
-class ThreadReserva(Thread):
-
-    def __init__(self, reservar_signal, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.reservar_signal = reservar_signal
-        self.tiempo = "00:00"
-
-    def run(self):
-        self.reservar_signal.emit(self.tiempo)
+# class ThreadReserva(Thread):
+# 
+#     def __init__(self, reservar_signal, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.reservar_signal = reservar_signal
+#         self.tiempo = "00:00"
+# 
+#     def run(self):
+#         self.reservar_signal.emit(self.tiempo)
 
 
 class RamosWindow(window_name, base_class):
@@ -39,7 +39,7 @@ class RamosWindow(window_name, base_class):
         '''
         Elementos gráficos y configuración adicional
         '''
-        self.reservar_thread = ThreadReserva(self.reservar_signal)
+        # self.reservar_thread = ThreadReserva(self.reservar_signal)
         # self.reservar_thread.setInterval(100)
         # self.reservar_thread.setSingleShot(True)
         # self.reservar_thread.timeout.connect(self.send_time)
@@ -139,14 +139,18 @@ class RamosWindow(window_name, base_class):
 
     def reservar(self):
         # Enviamos señal con el tiempo a request_time de logica ventana
-        self.reservar_thread.tiempo = self.timeEdit.time().toString()[:-3]
+        # self.reservar_thread.tiempo = self.timeEdit.time().toString()[:-3]
+
+        hora = self.timeEdit.time().toString()[:-3]
+        self.reservar_signal.emit(hora)
+
         print("Justo ANTES de ejecutar el thread")
-        self.reservar_thread.start()
+        # self.reservar_thread.start()
         print("Justo DESPUÉS de ejecutar el thread")
-        print(self.timeEdit.time().toString()[:-3])
+        # print(self.timeEdit.time().toString()[:-3])
         # self.tiempo_progressbar.setValue(10)
         print("Justo ANTES de ejecutar el TIMER")
-        self.timer_progressbar.start()
+        # self.timer_progressbar.start()
         print("Justo DESPUÉS de ejecutar el TIMER")
         self.statusbar.showMessage('¡Toma de ramos agendada! Ahora solo espera'
                                    ' y mira la magia...', 10000)
