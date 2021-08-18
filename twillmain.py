@@ -4,8 +4,10 @@ from functions import obtener_errores_de
 
 avance = 0
 
+
 def main():
     # Ingresar usuario y contraseña
+    print('Creador con <3 por Dyotson (Max Militzer) y voluntarios de OSUC\n')
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
     usuario = input("Usuario UC: ")
     password = input("Contraseña UC: ")
@@ -63,9 +65,11 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     submit(submit_button=112)
     reset_output()
     avance = 100
-    print('\n¡Ramos tomados! Ya puedes cerrar el programa... (Recuerda revisar el archivo \'pruebadetoma.html\' para verificar errores')
+    print('\n¡Ramos tomados! Ya puedes cerrar el programa... Revisa los errores a continuacion:\n')
     save_html('pruebadetoma.html')
-    print(obtener_errores_de('pruebadetoma.html'))
+    ramos = obtener_errores_de('pruebadetoma.html')
+    for ramo in ramos:
+        print(ramo[1], '-', ramo[0])
     exit()
 
 
