@@ -1,5 +1,12 @@
 def extraer(s):
-    return s[s[:len(s)-2].rfind('>') + 1 : s.find('</TD')].strip()
+    s = s[s[:len(s)-2].find('>') + 1 : s.find('</TD')].strip()
+    if 'ACRONYM' in s:
+        if s.find('<ACRONYM') == 0:
+            s = s[s.find('</ACRONYM') + 10:: ]
+        else:
+            s = s[0: s.find('<ACRONYM')]
+    s = s.strip()
+    return s
 
 def hay_errores(info):
     inicio = 0
