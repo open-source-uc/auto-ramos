@@ -1,7 +1,8 @@
 from twill.commands import *
 import schedule
-avance = 0
+from functions import obtener_errores_de
 
+avance = 0
 
 def main():
     # Ingresar usuario y contraseña
@@ -64,7 +65,8 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     avance = 100
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... (Recuerda revisar el archivo \'pruebadetoma.html\' para verificar errores')
     save_html('pruebadetoma.html')
-    exit
+    print(obtener_errores_de('pruebadetoma.html'))
+    exit()
 
 
 def reservar(usuario, password, NRC, hora):
