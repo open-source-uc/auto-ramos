@@ -1,4 +1,5 @@
 from PyQt5.QtCore import QObject
+from threading import Thread
 from PyQt5.QtCore import pyqtSignal
 import twillmain
 
@@ -24,6 +25,7 @@ class Logica(QObject):
         self.main_window = main_window
         self.login_window = login_window
         self.login_signal.connect(self.verify_login)
+        self.thread_reservar = None
 
     def verify_login(self, credenciales):
         respuesta = twillmain.verificar_sesion(*credenciales)
@@ -55,7 +57,8 @@ class Logica(QObject):
 
     def request_time(self, time):
         self.time = time
-        self.reservar()
+        self.thread_reservar = Thread(target=self.reservar)
+        self.thread_reservar.start()
 
     def reservar(self):
         twillmain.reservar(
