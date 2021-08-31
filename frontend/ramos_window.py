@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QTimer, QThread
+from PyQt5.QtCore import QTime, QTimer, QThread
 from PyQt5.QtCore import pyqtSignal
 from threading import Thread
 from PyQt5 import QtCore
@@ -29,6 +29,7 @@ class RamosWindow(window_name, base_class):
     add_nrc_signal = pyqtSignal(str)
     del_nrc_signal = pyqtSignal(str)
     reservar_signal = pyqtSignal(str)
+    cancelar_signal = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -80,6 +81,8 @@ class RamosWindow(window_name, base_class):
 
         self.add_button_1.clicked.connect(lambda:
                                           self.show_nrc_layout("2"))
+        self.add_button_1.clicked.connect(lambda:
+                                          self.enable_confirmar_button(True))
         self.add_button_2.clicked.connect(lambda:
                                           self.show_nrc_layout("3"))
         self.add_button_1.clicked.connect(lambda:
@@ -100,11 +103,19 @@ class RamosWindow(window_name, base_class):
         self.eliminar_button_3.clicked.connect(
             lambda: self.del_confirmed_nrc("3")
         )
+        self.confirmar_button.setEnabled(False)
         self.confirmar_button.clicked.connect(self.reservar)
+        self.cancelar_button.clicked.connect(self.cancel)
 
     def add_nrc(self, id_):
         nrc_nuevo = self.nrcs_lineedits[id_].text()
         self.add_nrc_signal.emit(nrc_nuevo)
+
+    def enable_confirmar_button(self, enable):
+        if enable:
+            self.confirmar_button.setEnabled(True)
+        else:
+            self.confirmar_button.setEnabled(False)
 
     def show_nrc_layout(self, id_):
         self.nrc_frames[id_].show()
@@ -165,6 +176,17 @@ class RamosWindow(window_name, base_class):
         tiempo = self.timeEdit.time().toString()[:-3]
         self.reservar_signal.emit(tiempo)
         print("Emití la señal de enviar tiempo")
+
+    def cancel(self):
+        self.cancelar_signal.emit()
+        self.timeEdit.setTime(QTime(0, 0, 0))
+        for nrc_lineedit in self.nrcs_lineedits.values():
+            nrc_lineedit.setText("")
+        for nrc_layout in list(self.nrc_frames.values())[1:]:
+            nrc_layout.hide()
+        for id_ in range(1, 4):
+            self.del_confirmed_nrc(str(id_))
+        self.enable_confirmar_button(False)
 
 
 if __name__ == '__main__':

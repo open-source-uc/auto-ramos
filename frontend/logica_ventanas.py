@@ -46,9 +46,12 @@ class Logica(QObject):
         self.show_nrc_signal.emit(nrc)
 
     def del_nrc(self, nrc):
-        self.usuario.nrcs_list.remove(str(nrc))
-        print(f"Backend DEBUG: Se ha ELIMINADO el nrc {nrc} de pana!")
-        print(self.usuario.nrcs_list)
+        try:
+            self.usuario.nrcs_list.remove(str(nrc))
+            print(f"Backend DEBUG: Se ha ELIMINADO el nrc {nrc} de pana!")
+            print(self.usuario.nrcs_list)
+        except Exception as error:
+            print("Warning: Se intentó eliminar un nrc no existente!")
 
     def request_time(self, time):
         self.time = time
