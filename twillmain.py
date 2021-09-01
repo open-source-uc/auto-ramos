@@ -102,5 +102,9 @@ def verificar_sesion(usuario, password) -> tuple:
         return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
 
 
+def cancelar_schedule():
+    schedule.clear()
+
+
 if __name__ == '__main__':
     main()
