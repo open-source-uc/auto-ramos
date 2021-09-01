@@ -163,8 +163,8 @@ class RamosWindow(window_name, base_class):
         print("Justo ANTES de ejecutar el TIMER")
         # self.timer_progressbar.start()
         print("Justo DESPUÉS de ejecutar el TIMER")
-        # self.statusbar.showMessage('¡Toma de ramos agendada! Ahora solo espera'
-                                #    ' y mira la magia...', 10000)
+        self.statusbar.showMessage('¡Toma de ramos agendada! Ahora solo espera'
+                                   ' y mira la magia...', 10000)
 
     def update_progressbar(self):
         print("Debug: El avance es:")
