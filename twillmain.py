@@ -55,9 +55,7 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     save_html('pruebadetoma.html')
     # Aplicar NRC
     if len(NRC) == 1:
-        avance = 82
         fv('2', 'crn_id1', NRC[0])
-        avance = 84
     elif len(NRC) == 2:
         fv('2', 'crn_id1', NRC[0])
         fv('2', 'crn_id2', NRC[1])
@@ -66,7 +64,6 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
         fv('2', 'crn_id2', NRC[1])
         fv('2', 'crn_id3', NRC[2])
     submit(submit_button='Enviar Cambios')
-    avance = 86
     reset_output()
     avance = 100
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... Revisa los errores a continuacion:\n')
@@ -84,7 +81,6 @@ def reservar(usuario, password, NRC, hora):
             schedule.run_pending()
     except:
         print('Formato de hora invalido, recuerda ingresarlo en 24hrs')
-        print("Avance:", avance)
 
 
 def verificar_sesion(usuario, password) -> tuple:
