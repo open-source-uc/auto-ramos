@@ -52,17 +52,18 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     submit('0')
     avance = 80
 
+    save_html('pruebadetoma.html')
     # Aplicar NRC
     if len(NRC) == 1:
-        fv('2', 95, NRC[0])
+        fv('2', 'crn_id1', NRC[0])
     elif len(NRC) == 2:
-        fv('2', 95, NRC[0])
-        fv('2', 100, NRC[1])
+        fv('2', 'crn_id1', NRC[0])
+        fv('2', 'crn_id2', NRC[1])
     elif len(NRC) == 3:
-        fv('2', 95, NRC[0])
-        fv('2', 100, NRC[1])
-        fv('2', 105, NRC[2])
-    submit(submit_button=112)
+        fv('2', 'crn_id1', NRC[0])
+        fv('2', 'crn_id2', NRC[1])
+        fv('2', 'crn_id3', NRC[2])
+    submit(submit_button='Enviar Cambios')
     reset_output()
     avance = 100
     print('\n¡Ramos tomados! Ya puedes cerrar el programa... Revisa los errores a continuacion:\n')
