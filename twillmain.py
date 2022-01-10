@@ -1,5 +1,6 @@
 from twill.commands import *
 from getpass import getpass
+from datetime import datetime as dt, time, timedelta
 import schedule
 from functions import obtener_errores_de
 
@@ -19,12 +20,12 @@ def main():
     NRC = NRC.split()
     hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
     if hora == 'debug':
-        tomar_ramos(usuario, password, NRC)
+        tomar_ramos(NRC)
     print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
     reservar(usuario, password, NRC, hora)
 
 
-def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que usa Sessions
+def tomar_ramos(NRC):  # Esto debe ser de una corrida ya que usa Sessions
     # Ya logeado, printea que va a tomar ramos y redirige el output
     global avance
     avance = 16
@@ -77,11 +78,14 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
 
 def reservar(usuario, password, NRC, hora):
     try:
-        schedule.every().day.at(hora).do(
-            tomar_ramos, usuario=usuario, password=password, NRC=NRC)
+        if necesitaRelogin(hora):
+            hora_login = restar_minutos(hora, minutos=5)
+            schedule.every().day.at(hora_login).do(
+                verificar_sesion, usuario=usuario, password=password)
+        schedule.every().day.at(hora).do(tomar_ramos, NRC=NRC)
         while True:
             schedule.run_pending()
-    except:
+    except schedule.ScheduleValueError:
         print('Formato de hora invalido, recuerda ingresarlo en 24hrs')
 
 
@@ -103,6 +107,30 @@ def verificar_sesion(usuario, password) -> tuple:
     except:
         print('Credenciales rechazadas, porfavor intenta nuevamente')
         return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
+
+
+def necesitaRelogin(hora):
+    '''
+    Retorna True si "hora" ocurrirá en más de 15 minutos, False en caso contrario.
+        hora: Un string con la forma "%H:%M"
+    '''
+    actual = dt.now()
+    reserva = dt.combine(actual, time.fromisoformat(hora))
+    waittime = (reserva - actual).total_seconds()
+    if waittime >= 15*60 or waittime < 0:
+        return True
+    return False
+
+
+def restar_minutos(hora, minutos):
+    '''
+    Resta a "hora" la cantidad de minutos ingresada en "minutos".
+        hora: Un string con la forma "%H:%M"
+        miutos: Un entero que representa la cantidad de minutos a restar
+    '''
+    hora_original = dt.combine(dt.now(), time.fromisoformat(hora))
+    hora_con_resta = hora_original - timedelta(minutes=minutos)
+    return hora_con_resta.strftime("%H:%M")
 
 
 def cancelar_schedule():
