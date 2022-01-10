@@ -1,4 +1,5 @@
 from twill.commands import *
+from getpass import getpass
 import schedule
 from functions import obtener_errores_de
 
@@ -10,7 +11,7 @@ def main():
     print('Creador con <3 por Dyotson (Max Militzer) y voluntarios de OSUC\n')
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
     usuario = input("Usuario UC: ")
-    password = input("Contraseña UC: ")
+    password = getpass("Contraseña UC: ")
     chequeo = verificar_sesion(usuario, password)
     if chequeo[0] is False:
         exit()
@@ -76,7 +77,8 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
 
 def reservar(usuario, password, NRC, hora):
     try:
-        schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
+        schedule.every().day.at(hora).do(
+            tomar_ramos, usuario=usuario, password=password, NRC=NRC)
         while True:
             schedule.run_pending()
     except:
