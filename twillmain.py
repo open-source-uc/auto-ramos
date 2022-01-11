@@ -54,7 +54,6 @@ def tomar_ramos(NRC):  # Esto debe ser de una corrida ya que usa Sessions
     submit('0')
     avance = 80
 
-    save_html('pruebadetoma.html')
     # Aplicar NRC
     if len(NRC) == 1:
         fv('2', 'crn_id1', NRC[0])
@@ -94,9 +93,10 @@ def verificar_sesion(usuario, password) -> tuple:
     print('\nChequeando credenciales...')
     redirect_output('output.log')
     go('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
-    formclear('1')
-    fv('1', 'sid', usuario)
-    fv('1', 'PIN', password)
+    formnum = f'{len(showforms())}'
+    formclear(formnum)
+    fv(formnum, 'sid', usuario)
+    fv(formnum, 'PIN', password)
     submit('0')
     go("http://ssb.uc.cl/ERPUC/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu")
     reset_output()
