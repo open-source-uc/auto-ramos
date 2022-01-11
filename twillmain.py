@@ -111,13 +111,14 @@ def verificar_sesion(usuario, password) -> tuple:
 
 def necesitaRelogin(hora):
     '''
-    Retorna True si "hora" ocurrirá en más de 15 minutos, False en caso contrario.
+    Retorna True si "hora" ocurrirá en más de 10 minutos, False en caso contrario.
         hora: Un string con la forma "%H:%M"
     '''
     actual = dt.now()
     reserva = dt.combine(actual, time.fromisoformat(hora))
     waittime = (reserva - actual).total_seconds()
-    if waittime >= 15*60 or waittime < 0:
+    minutos_espera = 10
+    if waittime >= minutos_espera*60 or waittime < 0:
         return True
     return False
 
