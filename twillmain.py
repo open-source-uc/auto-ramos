@@ -1,4 +1,6 @@
 from twill.commands import *
+from getpass import getpass
+from datetime import datetime as dt, time, timedelta
 import schedule
 from functions import obtener_errores_de
 
@@ -10,7 +12,7 @@ def main():
     print('Creador con <3 por Dyotson (Max Militzer) y voluntarios de OSUC\n')
     print("¡NO CIERRES EL PROGRAMA HASTA QUE ESTE TOME RAMOS Y TE CONFIRME!\n")
     usuario = input("Usuario UC: ")
-    password = input("Contraseña UC: ")
+    password = getpass("Contraseña UC: ")
     chequeo = verificar_sesion(usuario, password)
     if chequeo[0] is False:
         exit()
@@ -18,12 +20,12 @@ def main():
     NRC = NRC.split()
     hora = input("Ingresa la hora en formato 24 hrs (Ej: 08:00 o 16:00): ")
     if hora == 'debug':
-        tomar_ramos(usuario, password, NRC)
+        tomar_ramos(NRC)
     print('\n¡Toma agendada! ¡Recuerda no cerrar el programa hasta que este te confirme que tomo tus ramos!')
     reservar(usuario, password, NRC, hora)
 
 
-def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que usa Sessions
+def tomar_ramos(NRC):  # Esto debe ser de una corrida ya que usa Sessions
     # Ya logeado, printea que va a tomar ramos y redirige el output
     global avance
     avance = 16
@@ -52,7 +54,6 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
     submit('0')
     avance = 80
 
-    save_html('pruebadetoma.html')
     # Aplicar NRC
     if len(NRC) == 1:
         fv('2', 'crn_id1', NRC[0])
@@ -76,10 +77,14 @@ def tomar_ramos(usuario, password, NRC):  # Esto debe ser de una corrida ya que 
 
 def reservar(usuario, password, NRC, hora):
     try:
-        schedule.every().day.at(hora).do(tomar_ramos, usuario=usuario, password=password, NRC=NRC)
+        if necesitaRelogin(hora):
+            hora_login = restar_minutos(hora, minutos=5)
+            schedule.every().day.at(hora_login).do(
+                verificar_sesion, usuario=usuario, password=password)
+        schedule.every().day.at(hora).do(tomar_ramos, NRC=NRC)
         while True:
             schedule.run_pending()
-    except:
+    except schedule.ScheduleValueError:
         print('Formato de hora invalido, recuerda ingresarlo en 24hrs')
 
 
@@ -88,9 +93,10 @@ def verificar_sesion(usuario, password) -> tuple:
     print('\nChequeando credenciales...')
     redirect_output('output.log')
     go('https://ssb.uc.cl/ERPUC/twbkwbis.P_WWWLogin')
-    formclear('1')
-    fv('1', 'sid', usuario)
-    fv('1', 'PIN', password)
+    formnum = f'{len(showforms())}'
+    formclear(formnum)
+    fv(formnum, 'sid', usuario)
+    fv(formnum, 'PIN', password)
     submit('0')
     go("http://ssb.uc.cl/ERPUC/twbkwbis.P_GenMenu?name=bmenu.P_MainMnu")
     reset_output()
@@ -101,6 +107,31 @@ def verificar_sesion(usuario, password) -> tuple:
     except:
         print('Credenciales rechazadas, porfavor intenta nuevamente')
         return(False, 'Credenciales rechazadas, porfavor intenta nuevamente')
+
+
+def necesitaRelogin(hora):
+    '''
+    Retorna True si "hora" ocurrirá en más de 10 minutos, False en caso contrario.
+        hora: Un string con la forma "%H:%M"
+    '''
+    actual = dt.now()
+    reserva = dt.combine(actual, time.fromisoformat(hora))
+    waittime = (reserva - actual).total_seconds()
+    minutos_espera = 10
+    if waittime >= minutos_espera*60 or waittime < 0:
+        return True
+    return False
+
+
+def restar_minutos(hora, minutos):
+    '''
+    Resta a "hora" la cantidad de minutos ingresada en "minutos".
+        hora: Un string con la forma "%H:%M"
+        miutos: Un entero que representa la cantidad de minutos a restar
+    '''
+    hora_original = dt.combine(dt.now(), time.fromisoformat(hora))
+    hora_con_resta = hora_original - timedelta(minutes=minutos)
+    return hora_con_resta.strftime("%H:%M")
 
 
 def cancelar_schedule():
